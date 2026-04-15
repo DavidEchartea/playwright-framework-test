@@ -13,8 +13,8 @@ jobs:
     env: 
       TCS_USER: ${{ secrets.TCS_USER }}
       TCS_PASSWORD: ${{ secrets.TCS_PASSWORD }}
-      BASE_URL: ${{ secrets. BASE_URL }}
-      
+      BASE_URL: ${{ secrets.BASE_URL }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
