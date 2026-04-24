@@ -15,4 +15,16 @@ export class Home {
        this.login = page.getByRole("link", {name: " Signup / Login" })
     }
 
+    async navigateProducts(){
+        await this.products.click()
+    }
+
+    async navigateCart(){
+        await this.cart.click()
+    }
+
+    async navigateLogin() {
+        await this.login.click()
+    }
+
 }
