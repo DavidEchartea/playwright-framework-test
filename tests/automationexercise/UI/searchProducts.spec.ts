@@ -18,15 +18,11 @@ test.describe("Search products scenarios", () =>{
 
         const products = await productsPage.getProductsText()
         
-        console.log("Result of the search for", product,": ","\n", products)
-        
         const invalidProducts = products.filter(
             prod => !prod.toLowerCase().includes(product)
         )
-
-        if(invalidProducts.length > 0){
-            console.warn("Invalid products in the search for", product,": ","\n", invalidProducts)
-        }
+        
+        expect(invalidProducts, `Invalid products found for search "${product}": ${invalidProducts.join(", ")}`).toHaveLength(0)
     })
 
     test("Search multiple products", async ({homePage, productsPage, testData}) =>{
@@ -41,9 +37,7 @@ test.describe("Search products scenarios", () =>{
                 prod => !prod.toLowerCase().includes(product.toLowerCase())
             )
 
-            if(invalidProducts.length > 0){
-                console.warn("Invalid products in the search for", product,": ","\n", invalidProducts)
-            }
+            expect(invalidProducts, `Invalid products found for search "${product}": ${invalidProducts.join(", ")}`).toHaveLength(0)
         }
         
     })
