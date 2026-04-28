@@ -10,7 +10,7 @@ export class Home {
     constructor(page: Page){
        this.page = page
        this.home = page.getByRole("link", { name: "Home" })
-       this.products = page.getByRole("link", {name: "Products" })
+       this.products = page.locator("a[href='/products']")
        this.cart = page.getByRole("link", {name: "Cart" })
        this.login = page.getByRole("link", {name: " Signup / Login" })
     }

@@ -2,5 +2,9 @@
     "createUser-emailUsed":{
         "name": "TestingPW",
         "email": "test@test.com"
-    }
+    },
+    "searchProduct":{
+        "productName": "Dress"
+    },
+    "searchProducts": ["T-Shirt", "Jeans", "Dress"]
 }
