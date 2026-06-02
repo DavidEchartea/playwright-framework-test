@@ -41,6 +41,65 @@ test.describe("Search products scenarios", () =>{
         }
         
     })
+
+    test("Search product - not listed item", async ({homePage, productsPage, testData}) =>{
+        const product = testData["searchProduct-Invalid"].productName
+        await homePage.navigateProducts()
+        await productsPage.searchProduct(product)
+
+        const products = await productsPage.getProductsText()
+
+        expect(products).toHaveLength(0)
+    })
+
+    test("Filter by category and view product details", async ({homePage, productsPage, testData}) =>{
+        const categoryName = testData.filterByCategory.categoryName
+        const subcategory = testData.filterByCategory.subCategoryName
+        const productName = testData.filterByCategory.productName
+        const price = productsPage.productPrice
+        const availability = productsPage.productAvailability
+        const condition =  productsPage.productCondition
+        const brand =  productsPage.productBrand
+
+        await homePage.navigateProducts()
+        await productsPage.filterByCategory(categoryName, subcategory)
+
+        const products = await productsPage.getProductsText()
+        expect(products).not.toHaveLength(0)
+        
+        await productsPage.selectViewProduct(productName)
+
+        console.log(await price.allTextContents(), await availability.allTextContents(), await condition.allTextContents(), await brand.allTextContents())
+        await expect(price).toHaveText(/^Rs\. \d+$/)
+        await expect(availability).not.toBeNull()
+        await expect(condition).not.toBeNull()
+        await expect(brand).not.toBeNull()
+
+    })
+
+    test("Add to cart from view product detail and custom quantity", async ({homePage, productsPage, cartPage, testData}) =>{
+        const categoryName = testData.filterByCategory.categoryName
+        const subcategory = testData.filterByCategory.subCategoryName
+        const productName = testData.filterByCategory.productName
+        const productQuantity = testData.filterByCategory.Quantity
+
+        await homePage.navigateProducts()
+        await productsPage.filterByCategory(categoryName, subcategory)
+
+        const products = await productsPage.getProductsText()
+        expect(products).not.toHaveLength(0)
+        
+        await productsPage.selectViewProduct(productName)
+        await productsPage.modifyQuantity(productQuantity)
+        await productsPage.clickAddToCart()
+        await productsPage.clickViewCart()
+
+        const cartProductName = await cartPage.itemDescription.allTextContents()
+        const cartQuantity = await cartPage.itemQuantity.allTextContents()
+
+        await expect(cartProductName).toContain(productName)
+        await expect(cartQuantity[0]).toContain(productQuantity)
+    })
 })
 
 test.afterEach(async ({page})=>{

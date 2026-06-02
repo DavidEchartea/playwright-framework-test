@@ -4,11 +4,13 @@ import { Signup } from "../../pages/automationexercise/SignUp";
 import { createUser } from "../../resources/faker-js";
 import userData from '../../resources/testdata.json'
 import { Products } from "../../pages/automationexercise/Products";
+import { Cart } from "../../pages/automationexercise/Cart";
 
 const test = base.extend<{
   homePage: Home
   signUpPage: Signup
   productsPage: Products
+  cartPage: Cart
 
    credentials: {
     user: string
@@ -27,6 +29,9 @@ const test = base.extend<{
   },
   productsPage: async({page}, use) =>{
     await use(new Products(page))
+  },
+  cartPage: async({page}, use) =>{
+    await use(new Cart(page))
   },
 
   credentials: async ({}, use) => {

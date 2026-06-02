@@ -14,8 +14,6 @@ test.describe("Login scenarios", () =>{
     await homePage.navigateLogin()
     await signUpPage.login(credentials.user, credentials.password)
     await expect(signUpPage.username).toBeVisible()
-    const text = await signUpPage.username.innerText();
-    console.log(text);
     })
 
     test("Login - Incorrect password", async ({homePage, signUpPage, credentials}) =>{

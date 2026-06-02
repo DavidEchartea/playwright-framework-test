@@ -6,5 +6,16 @@
     "searchProduct":{
         "productName": "Jeans"
     },
-    "searchProducts": ["T-Shirt", "Jeans", "Saree"]
+    "searchProducts": [
+        "T-Shirt", "Jeans", "Saree"
+    ],
+    "searchProduct-Invalid":{
+        "productName": "InvalidItem"
+    },
+    "filterByCategory" : {
+        "categoryName": "Women",
+        "subCategoryName": "Dress",
+        "productName" : "Stylish Dress",
+        "Quantity" : "3"
+    }
 }
