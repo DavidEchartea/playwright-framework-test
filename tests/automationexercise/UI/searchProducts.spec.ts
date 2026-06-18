@@ -3,7 +3,7 @@ import { test } from "../../fixtures/fixtures";
 
 test.beforeEach(async({page, homePage, signUpPage, credentials}) =>{
     await page.goto('/')
-    await expect(homePage.home).toBeVisible({timeout: 20000})
+    await expect(homePage.home).toBeVisible({timeout: 10000})
     await homePage.navigateLogin()
     await signUpPage.login(credentials.user, credentials.password)
 })
@@ -99,6 +99,8 @@ test.describe("Search products scenarios", () =>{
 
         await expect(cartProductName).toContain(productName)
         await expect(cartQuantity[0]).toContain(productQuantity)
+
+        await cartPage.deleteItem()
     })
 })
 

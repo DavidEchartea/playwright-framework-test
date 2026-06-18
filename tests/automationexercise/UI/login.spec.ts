@@ -5,7 +5,7 @@ import { createUser } from "../../../resources/faker-js";
 test.beforeEach(async ({page, homePage}) =>{
     //console.log(process.env.BASE_URL)
     await page.goto('/')
-    await expect(homePage.home).toBeVisible({timeout: 20000})
+    await expect(homePage.home).toBeVisible({timeout: 10000})
 })
 
 test.describe("Login scenarios", () =>{

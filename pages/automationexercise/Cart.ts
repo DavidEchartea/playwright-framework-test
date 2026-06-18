@@ -15,10 +15,14 @@ export class Cart{
         this.itemPrice = page.locator('td[class="cart_price"]')
         this.itemQuantity = page.locator('td[class="cart_quantity"]')
         this.itemTotal = page.locator('td[class="cart_total"]')
-        this.itemDelete = page.locator('td[class="cart_delete"]')
+        this.itemDelete = page.locator('td[class="cart_delete"]').locator("a[class='cart_quantity_delete']")
         this.checkoutBtn = page.getByRole("button", {name: 'Proceed To Checkout'})
     }
 
-    
+    async deleteItem() {
+        if(await this.itemDelete.isVisible()){
+            await this.itemDelete.click()
+        }
+    }
 
 }
